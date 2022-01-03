@@ -18,7 +18,7 @@ Requires:       java-17-openjdk
 A next-generation compiler for Scala
 
 %prep
-%autosetup -n dotty-master -p1
+git clone https://github.com/lampepfl/dotty.git .
 
 mkdir -p $HOME
 wget -O- https://github.com/sbt/sbt/releases/download/v1.6.1/sbt-1.6.1.tgz | tar xvzf - -C $HOME
