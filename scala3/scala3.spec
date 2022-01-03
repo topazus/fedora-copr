@@ -10,7 +10,8 @@ License:        ASL 2.0
 URL:            https://github.com/lampepfl/dotty
 Source:         %{url}/archive/master/dotty-master.tar.gz
 
-BuildRequires:  pkg-config java-17-openjdk gzip wget
+BuildRequires:  pkg-config java-17-openjdk
+BuildRequires:  wget git
 
 Requires:       java-17-openjdk
 
