@@ -20,11 +20,11 @@ A next-generation compiler for Scala
 %prep
 %autosetup -n dotty-master -p1
 
-mkdir -p $HOME/sbt
-wget -O- https://github.com/sbt/sbt/releases/download/v1.6.1/sbt-1.6.1.tgz | tar xvzf - -C $HOME/sbt
+mkdir -p $HOME
+wget -O- https://github.com/sbt/sbt/releases/download/v1.6.1/sbt-1.6.1.tgz | tar xvzf - -C $HOME
 
 %build
-$HOME/sbt/sbt dist/packArchive
+$HOME/sbt/bin/sbt dist/packArchive
 
 %install
 mkdir -p %{buildroot}/opt/scala3
