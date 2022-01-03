@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=PyCharm Professional Edition
+Icon=intellij-idea-ultimate
+Comment=An intelligent IDE for Java, Groovy and other programming languages.
+Exec=/opt/pycharm-professional/bin/idea.sh %f
+Terminal=false
+Categories=Development;IDE;
+StartupNotify=true
+StartupWMClass=jetbrains-idea
