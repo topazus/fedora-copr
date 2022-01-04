@@ -10,7 +10,7 @@ License:        MIT
 URL:            https://github.com/ajeetdsouza/zoxide
 Source:         %{url}/archive/main/%{appname}-main.tar.gz
 
-BuildRequires: cargo
+BuildRequires:  cargo
 
 %description
 Faster way to navigate your filesystem.
@@ -36,7 +36,7 @@ cargo test
 
 %files
 %license LICENSE
-%doc README.md CHANGELOG.md
+%doc README.md
 %{_bindir}/zoxide
 %{_datadir}/bash-completion/completions/zoxide
 %{_datadir}/fish/vendor_completions.d/zoxide.fish

@@ -36,9 +36,7 @@ find target/release \
 rm -f %{buildroot}%{_bindir}/table
 rm -f %{buildroot}%{_bindir}/nu_plugin_{core,extra}_*
 
-
 %check
-
 
 %files
 %license LICENSE
