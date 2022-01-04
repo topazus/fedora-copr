@@ -29,7 +29,7 @@ $HOME/sbt/bin/sbt dist/packArchive
 
 %install
 mkdir -p %{buildroot}/opt/scala3
-cp -a dist/target/* %{buildroot}/opt/scala3
+cp -a dist/target/pack/* %{buildroot}/opt/scala3
 
 %check
 
@@ -37,6 +37,6 @@ cp -a dist/target/* %{buildroot}/opt/scala3
 %files
 %license LICENSE*
 %doc README.md
-%{buildroot}/opt/scala3/*
+/opt/scala3/*
 
 %changelog

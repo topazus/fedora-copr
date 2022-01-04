@@ -45,5 +45,6 @@ rm -f %{buildroot}%{_bindir}/nu_plugin_{core,extra}_*
 %doc README.md
 %{_bindir}/nu
 %{_bindir}/nu_plugin_*
+%{_bindir}/nu_pretty_hex
 
 %changelog

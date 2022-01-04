@@ -1,5 +1,5 @@
 %global debug_package %{nil}
-%define build_timestamp %{lua: print(os.date("%Y%m%d"))}
+%global build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
 %global appname zoxide
 
 Name:           %{appname}-git
