@@ -24,12 +24,9 @@ cargo build --release
 %install
 install -pDm755 target/release/%{appname} %{buildroot}%{_bindir}/%{appname}
 
-install -pDm644 contrib/completions/zoxide.bash \
-  %{buildroot}%{_datadir}/bash-completion/completions/zoxide
-install -pDm644 zoxide.plugin.zsh \
-  %{buildroot}%{_datadir}/zsh/site-functions/_zoxide
-install -pDm644 init.fish \
-  %{buildroot}%{_datadir}/fish/vendor_completions.d/zoxide.fish
+install -pDm644 contrib/completions/zoxide.bash %{buildroot}%{_datadir}/bash-completion/completions/zoxide
+install -pDm644 zoxide.plugin.zsh %{buildroot}%{_datadir}/zsh/site-functions/_zoxide
+install -pDm644 init.fish %{buildroot}%{_datadir}/fish/vendor_completions.d/zoxide.fish
 
 %check
 cargo test

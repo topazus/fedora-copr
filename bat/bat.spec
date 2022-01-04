@@ -10,9 +10,9 @@ Summary:        Cat(1) clone with wings
 
 License:        ASL 2.0 or MIT
 URL:            https://github.com/sharkdp/bat
-Source:         https://github.com/sharkdp/bat/archive/master/%{appname}-master.tar.gz
+Source:         %{url}/archive/master/%{appname}-master.tar.gz
 
-BuildRequires:  gcc-c++ pkg-config rust-packaging
+BuildRequires:  gcc-c++ pkg-config rust cargo
 
 %description
 A cat(1) clone with syntax highlighting and Git integration.
@@ -26,17 +26,13 @@ cargo build --release
 %install
 install -pDm755 target/release/%{appname} %{buildroot}%{_bindir}/%{appname}
 
-gzip -9k assets/manual/bat.1.in
-install -pDm644 assets/manual/bat.1.in.gz %{buildroot}%{_mandir}/%{appname}.1.gz
+install -pDm644 assets/manual/bat.1.in %{buildroot}%{_mandir}/%{appname}.1
 
-install -pDm644 assets/completions/bat.bash.in \
-    %{buildroot}%{_datadir}/bash-completion/completions/%{appname}
+install -pDm644 assets/completions/bat.bash.in %{buildroot}%{_datadir}/bash-completion/completions/%{appname}
 
-install -pDm644 assets/completions/bat.zsh.in \
-    %{buildroot}%{_datadir}/zsh/site-functions/_%{appname}
+install -pDm644 assets/completions/bat.zsh.in %{buildroot}%{_datadir}/zsh/site-functions/_%{appname}
 
-install -pDm644 assets/completions/bat.fish.in \
-    %{buildroot}%{_datadir}/fish/vendor_completions.d/%{appname}.fish
+install -pDm644 assets/completions/bat.fish.in %{buildroot}%{_datadir}/fish/vendor_completions.d/%{appname}.fish
 
 %if %{with check}
 %check
