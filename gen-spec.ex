@@ -1,4 +1,4 @@
-for i <- [
+ls = [
   "scala3",
   "alacritty",
   "zoxide",
@@ -11,10 +11,13 @@ for i <- [
   "opam",
   "bat",
   "xplr",
-  "intellij-idea-ultimate",
-], do:
+  "intellij-idea-ultimate"
+]
+
+for i <- ls do
   "https://raw.githubusercontent.com"
   |> URI.parse()
   |> URI.merge("topazus/fedora-copr/main/#{i}/#{i}.spec")
   |> to_string
-  |> IO.puts
+  |> IO.puts()
+end
