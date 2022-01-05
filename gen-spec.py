@@ -28,3 +28,10 @@ for i in ls:
         "https://raw.githubusercontent.com/topazus/fedora-copr/main/", f"{i}/{i}.spec"
     )
     print(url)
+print()
+for i in ls:
+    url = (
+        "https://raw.githubusercontent.com/topazus/fedora-copr/main/" + f"{i}/{i}.spec"
+    )
+
+    print(url)

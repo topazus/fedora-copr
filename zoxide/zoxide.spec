@@ -10,7 +10,9 @@ License:        MIT
 URL:            https://github.com/ajeetdsouza/zoxide
 Source:         %{url}/archive/main/%{appname}-main.tar.gz
 
-BuildRequires:  cargo
+%if 0%{?fedora} >= 34
+BuildRequires:  rust cargo
+%endif
 
 %description
 Faster way to navigate your filesystem.
@@ -18,8 +20,18 @@ Faster way to navigate your filesystem.
 %prep
 %autosetup -n %{appname}-main -p1
 
+%if 0%{?centos} <= 8
+if [ ! -d $HOME/.cargo ]; then
+  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+fi
+%endif
+
 %build
+%if 0%{?fedora} >= 34
 cargo build --release
+%elif 0%{?centos} <= 8
+$HOME/.cargo/bin/cargo build --release
+%endif
 
 %install
 install -pDm755 target/release/%{appname} %{buildroot}%{_bindir}/%{appname}

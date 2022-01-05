@@ -11,10 +11,11 @@ License:        ASL 2.0 or MIT
 URL:            https://github.com/alacritty/alacritty
 Source:         https://github.com/alacritty/alacritty/archive/master/alacritty-master.tar.gz
 
-BuildRequires:  gcc-c++ pkg-config
-BuildRequires:  desktop-file-utils
+BuildRequires:  gcc-c++ pkg-config desktop-file-utils
 BuildRequires:  cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel
+%if 0%{?fedora} >= 34
 BuildRequires:  rust cargo
+%endif
 
 %description
 Fast, cross-platform, OpenGL terminal emulator.
@@ -22,8 +23,18 @@ Fast, cross-platform, OpenGL terminal emulator.
 %prep
 %autosetup -n alacritty-master -p1
 
+%if 0%{?centos} <= 8
+if [ ! -d $HOME/.cargo ]; then
+  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+fi
+%endif
+
 %build
+%if 0%{?fedora} >= 34
 cargo build --release
+%elif 0%{?centos} <= 8
+$HOME/.cargo/bin/cargo build --release
+%endif
 
 %install
 install -pDm755 target/release/alacritty %{buildroot}%{_bindir}/%{appname}

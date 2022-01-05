@@ -21,3 +21,10 @@ for i <- ls do
   |> to_string
   |> IO.puts()
 end
+
+IO.puts("\n")
+
+for i <- ls do
+  ("https://raw.githubusercontent.com" <> "topazus/fedora-copr/main/#{i}/#{i}.spec")
+  |> IO.puts()
+end

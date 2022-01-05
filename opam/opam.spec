@@ -45,7 +45,7 @@ Opam is a source-based package manager for OCaml. It supports multiple simultane
 %if 0%{?fedora} >= 34
 %configure
 make
-%elif 0%{?rhel} <= 8
+%elif 0%{?centos} <= 8
 make cold
 %endif
 
