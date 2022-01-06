@@ -35,17 +35,11 @@ find target/release \
     -type f \
     -exec install -pDm755 -t %{buildroot}%{_bindir} {} +
 
-# remove binaries not present in upstream releases
-rm -f %{buildroot}%{_bindir}/table
-rm -f %{buildroot}%{_bindir}/nu_plugin_{core,extra}_*
-
 %check
 
 %files
 %license LICENSE
 %doc README.md
-%{_bindir}/nu
-%{_bindir}/nu_plugin_*
-%{_bindir}/nu_pretty_hex
+%{_bindir}/nu*
 
 %changelog

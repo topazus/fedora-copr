@@ -10,27 +10,19 @@ URL:            https://github.com/sayanarijit/xplr
 Source:         https://github.com/sayanarijit/xplr/archive/main/%{appname}-main.tar.gz
 
 BuildRequires:  gcc pkg-config desktop-file-utils
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-BuildRequires:  rust cargo
-%endif
 
 %description
 A hackable, minimal, fast TUI file explorer.
 
 %prep
 %autosetup -n %{appname}-main -p1
-%if 0%{?centos} < 9
-if [ ! -d $HOME/.cargo ]; then
-  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
-fi
-%endif
+
+curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+
 
 %build
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-cargo build --release
-%elif 0%{?centos} < 9
 $HOME/.cargo/bin/cargo build --release
-%endif
+
 
 %install
 install -pDm755 target/release/xplr %{buildroot}%{_bindir}/xplr
@@ -39,12 +31,10 @@ install -pDm644 assets/desktop/xplr.desktop %{buildroot}%{_datadir}/applications
 install -pDm644 src/init.lua %{buildroot}%{_datadir}/xplr/example/init.lua
 
 for i in 128 16 32 64; do
-    install -pDm644 assets/icon/xplr${i}.png \
-        %{buildroot}%{_datadir}/icons/hicolor/${i}x${i}/apps/xplr.png
+    install -pDm644 assets/icon/xplr${i}.png %{buildroot}%{_datadir}/icons/hicolor/${i}x${i}/apps/xplr.png
 done
 
-install -pDm644 assets/icon/xplr.svg \
-    %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/xplr.svg
+install -pDm644 assets/icon/xplr.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/xplr.svg
 
 %check
 desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop

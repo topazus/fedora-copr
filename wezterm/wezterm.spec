@@ -16,10 +16,6 @@ BuildRequires:  libxcb-devel libxkbcommon-devel libxkbcommon-x11-devel wayland-d
 BuildRequires:  xcb-util-devel xcb-util-keysyms-devel xcb-util-image-devel xcb-util-wm-devel
 BuildRequires:  git desktop-file-utils
 
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-BuildRequires:  rust cargo
-%endif
-
 Requires:       openssl
 
 %description
@@ -29,18 +25,12 @@ A GPU-accelerated cross-platform terminal emulator and multiplexer.
 git clone --depth=1 --branch=main --recursive https://github.com/wez/wezterm.git .
 git submodule update --init --recursive
 
-%if 0%{?centos} < 9
-if [ ! -d $HOME/.cargo ]; then
-  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
-fi
-%endif
+curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+
 
 %build
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-cargo build --release
-%elif 0%{?centos} < 9
 $HOME/.cargo/bin/cargo build --release
-%endif
+
 
 %install
 install -pDm755 target/release/wezterm %{buildroot}%{_bindir}/%{appname}
