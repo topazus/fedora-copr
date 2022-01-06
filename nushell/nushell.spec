@@ -13,7 +13,7 @@ Source:         %{url}/archive/main/%{appname}-main.tar.gz
 BuildRequires:  gcc-c++ cmake pkg-config
 BuildRequires:  desktop-file-utils
 BuildRequires:  libxcb openssl-devel libX11-devel
-%if 0%{?fedora} >= 34
+%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
 BuildRequires:  rust cargo
 %endif
 
@@ -23,18 +23,19 @@ A new type of shell.
 %prep
 %autosetup -n %{appname}-main -p1
 
-%if 0%{?centos} <= 8
+%if 0%{?centos} < 9
 if [ ! -d $HOME/.cargo ]; then
   curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
 fi
 %endif
 
 %build
-%if 0%{?fedora} >= 34
-cargo build --release  --workspace --features=extra
-%elif 0%{?centos} <= 8
-$HOME/.cargo/bin/cargo build --release  --workspace --features=extra
+%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
+cargo build --release --workspace --features=extra
+%elif 0%{?centos} < 9
+$HOME/.cargo/bin/cargo build --release --workspace --features=extra
 %endif
+
 
 %install
 # binaries

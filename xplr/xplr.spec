@@ -10,18 +10,27 @@ URL:            https://github.com/sayanarijit/xplr
 Source:         https://github.com/sayanarijit/xplr/archive/main/%{appname}-main.tar.gz
 
 BuildRequires:  gcc pkg-config desktop-file-utils
+%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
+BuildRequires:  rust cargo
+%endif
 
 %description
 A hackable, minimal, fast TUI file explorer.
 
 %prep
 %autosetup -n %{appname}-main -p1
+%if 0%{?centos} < 9
 if [ ! -d $HOME/.cargo ]; then
   curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
 fi
+%endif
 
 %build
+%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
+cargo build --release
+%elif 0%{?centos} < 9
 $HOME/.cargo/bin/cargo build --release
+%endif
 
 %install
 install -pDm755 target/release/xplr %{buildroot}%{_bindir}/xplr

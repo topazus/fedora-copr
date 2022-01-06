@@ -10,8 +10,7 @@ ls = [
   "dua-cli",
   "opam",
   "bat",
-  "xplr",
-  "intellij-idea-ultimate"
+  "xplr"
 ]
 
 for i <- ls do

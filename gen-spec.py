@@ -14,7 +14,6 @@ ls = [
     "opam",
     "bat",
     "xplr",
-    "intellij-idea-ultimate",
 ]
 for i in ls:
     url_path = posixpath.join(f"{i}", f"{i}.spec")

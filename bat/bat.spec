@@ -12,16 +12,28 @@ License:        ASL 2.0 or MIT
 URL:            https://github.com/sharkdp/bat
 Source:         %{url}/archive/master/%{appname}-master.tar.gz
 
-BuildRequires:  gcc-c++ pkg-config rust cargo
+BuildRequires:  gcc-c++ pkg-config
+%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
+BuildRequires:  rust cargo
+%endif
 
 %description
 A cat(1) clone with syntax highlighting and Git integration.
 
 %prep
 %autosetup -n %{appname}-master -p1
+%if 0%{?centos} < 9
+if [ ! -d $HOME/.cargo ]; then
+  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+fi
+%endif
 
 %build
+%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
 cargo build --release
+%elif 0%{?centos} < 9
+$HOME/.cargo/bin/cargo build --release
+%endif
 
 %install
 install -pDm755 target/release/%{appname} %{buildroot}%{_bindir}/%{appname}
