@@ -1,7 +1,6 @@
 %global debug_package %{nil}
 %global build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
 %global appname exa
-%bcond_without check
 
 Name:           %{appname}-git
 Version:        %{build_timestamp}
@@ -12,9 +11,6 @@ URL:            https://github.com/ogham/exa
 Source:         %{url}/archive/master/%{appname}-master.tar.gz
 
 BuildRequires:  gcc-c++
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-BuildRequires:  rust cargo
-%endif
 
 %description
 exa is a modern replacement for the venerable file-listing command-line program ls that ships with Unix and Linux operating systems, giving it more features and better defaults.
@@ -22,18 +18,12 @@ exa is a modern replacement for the venerable file-listing command-line program 
 %prep
 %autosetup -n %{appname}-master -p1
 
-%if 0%{?centos} < 9
-if [ ! -d $HOME/.cargo ]; then
-  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
-fi
-%endif
+curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+
 
 %build
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-cargo build --release
-%elif 0%{?centos} < 9
 $HOME/.cargo/bin/cargo build --release
-%endif
+
 
 %install
 install -pDm755 target/release/exa %{buildroot}%{_bindir}/%{appname}
@@ -42,10 +32,8 @@ install -pDm644 completions/bash/exa %{buildroot}%{_datadir}/bash-completion/com
 install -pDm644 completions/zsh/_exa %{buildroot}%{_datadir}/zsh/site-functions/_%{appname}
 install -pDm644 completions/fish/exa.fish %{buildroot}%{_datadir}/fish/vendor_completion.d/%{appname}.fish
 
-%if %{with check}
 %check
-cargo test
-%endif
+
 
 %files
 %doc README.md

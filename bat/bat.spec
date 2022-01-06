@@ -1,6 +1,5 @@
-%bcond_without check
-%global build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
 %global debug_package %{nil}
+%global build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
 %global appname bat
 
 Name:           %{appname}-git
@@ -22,18 +21,10 @@ A cat(1) clone with syntax highlighting and Git integration.
 
 %prep
 %autosetup -n %{appname}-master -p1
-%if 0%{?centos} < 9
-if [ ! -d $HOME/.cargo ]; then
-  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
-fi
-%endif
+curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
 
 %build
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-cargo build --release
-%elif 0%{?centos} < 9
 $HOME/.cargo/bin/cargo build --release
-%endif
 
 %install
 install -pDm755 target/release/%{appname} %{buildroot}%{_bindir}/%{appname}
@@ -46,10 +37,8 @@ install -pDm644 assets/completions/bat.zsh.in %{buildroot}%{_datadir}/zsh/site-f
 
 install -pDm644 assets/completions/bat.fish.in %{buildroot}%{_datadir}/fish/vendor_completions.d/%{appname}.fish
 
-%if %{with check}
 %check
-cargo test
-%endif
+
 
 %files
 %license LICENSE*

@@ -10,9 +10,7 @@ License:        MIT
 URL:            https://github.com/ajeetdsouza/zoxide
 Source:         %{url}/archive/main/%{appname}-main.tar.gz
 
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-BuildRequires:  rust cargo
-%endif
+BuildRequires:  gcc-c++
 
 %description
 Faster way to navigate your filesystem.
@@ -20,18 +18,10 @@ Faster way to navigate your filesystem.
 %prep
 %autosetup -n %{appname}-main -p1
 
-%if 0%{?centos} < 9
-if [ ! -d $HOME/.cargo ]; then
-  curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
-fi
-%endif
+curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
 
 %build
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
-cargo build --release
-%elif 0%{?centos} < 9
 $HOME/.cargo/bin/cargo build --release
-%endif
 
 %install
 install -pDm755 target/release/%{appname} %{buildroot}%{_bindir}/%{appname}
@@ -41,7 +31,6 @@ install -pDm644 zoxide.plugin.zsh %{buildroot}%{_datadir}/zsh/site-functions/_zo
 install -pDm644 init.fish %{buildroot}%{_datadir}/fish/vendor_completions.d/zoxide.fish
 
 %check
-cargo test
 
 %files
 %license LICENSE
