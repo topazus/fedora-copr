@@ -32,7 +32,7 @@ fi
 %build
 %if 0%{?fedora} >= 34 || 0%{?centos} >= 9
 cargo build --release
-%elif 0%{?centos} <= 8
+%else
 $HOME/.cargo/bin/cargo build --release
 %endif
 
