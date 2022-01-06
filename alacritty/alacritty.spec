@@ -13,7 +13,7 @@ Source:         https://github.com/alacritty/alacritty/archive/master/alacritty-
 
 BuildRequires:  gcc-c++ pkg-config desktop-file-utils
 BuildRequires:  cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
+%if 0%{?fedora} >= 34 || 0%{?centos} >= 9
 BuildRequires:  rust cargo
 %endif
 
@@ -30,7 +30,7 @@ fi
 %endif
 
 %build
-%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
+%if 0%{?fedora} >= 34 || 0%{?centos} >= 9
 cargo build --release
 %elif 0%{?centos} < 9
 $HOME/.cargo/bin/cargo build --release
