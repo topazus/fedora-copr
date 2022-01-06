@@ -29,7 +29,6 @@ $HOME/.cargo/bin/cargo build --release
 install -pDm755 target/release/btm %{buildroot}%{_bindir}/%{appname}
 
 %check
-cargo test
 
 %files
 %license LICENSE*
