@@ -23,7 +23,7 @@ Fast, cross-platform, OpenGL terminal emulator.
 %prep
 %autosetup -n alacritty-master -p1
 
-%if 0%{?centos} < 9
+%if 0%{?centos} <= 8
 if [ ! -d $HOME/.cargo ]; then
   curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
 fi
@@ -32,7 +32,7 @@ fi
 %build
 %if 0%{?fedora} >= 34 || 0%{?centos} >= 9
 cargo build --release
-%elif 0%{?centos} < 9
+%elif 0%{?centos} <= 8
 $HOME/.cargo/bin/cargo build --release
 %endif
 
