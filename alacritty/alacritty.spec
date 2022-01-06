@@ -30,7 +30,11 @@ fi
 %endif
 
 %build
-  --workspace --features=extra
+%if 0%{?fedora} >= 34 && 0%{?centos} >= 9
+cargo build --release
+%elif 0%{?centos} < 9
+$HOME/.cargo/bin/cargo build --release
+%endif
 
 %install
 install -pDm755 target/release/alacritty %{buildroot}%{_bindir}/%{appname}
