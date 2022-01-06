@@ -12,7 +12,7 @@ Source:         https://github.com/ocaml/opam/archive/master/%{appname}-master.t
 
 BuildRequires:  gcc gcc-c++ make pkg-config git openssl
 
-%if 0%{?fedora} >= 34  || 0%{?centos} >= 9
+%if 0%{?fedora} >= 34
 BuildRequires:  ocaml >= 4.08
 BuildRequires:  ocaml-findlib-devel
 BuildRequires:  ocaml-ocamlbuild
@@ -32,7 +32,6 @@ BuildRequires:  ocaml-dune
 
 BuildRequires:  glpk-devel
 %endif
-
 BuildRequires:  zlib-devel
 
 Requires:       bubblewrap m4 patch
@@ -44,7 +43,7 @@ Opam is a source-based package manager for OCaml. It supports multiple simultane
 %autosetup -n %{appname}-master -p1
 
 %build
-%if 0%{?fedora} >= 34 || 0%{?centos} >= 9
+%if 0%{?fedora} >= 34
 %configure
 make
 %else
