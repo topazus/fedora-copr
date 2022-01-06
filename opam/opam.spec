@@ -48,7 +48,7 @@ Opam is a source-based package manager for OCaml. It supports multiple simultane
 %configure
 make
 %else
-make cold
+make cold CONFIGURE_ARGS="--prefix %{buildroot}%{_prefix}"
 %endif
 
 %install
