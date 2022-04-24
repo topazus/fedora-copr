@@ -39,8 +39,8 @@ install -pDm755 target/release/wezterm-mux-server %{buildroot}%{_bindir}/wezterm
 install -pDm755 target/release/strip-ansi-escapes %{buildroot}%{_bindir}/strip-ansi-escapes
 
 install -pDm644 assets/wezterm.desktop %{buildroot}%{_datadir}/applications/%{appname}.desktop
-install -pDm644 assets/icon/wezterm-icon.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/org.wezfurlong.wezterm.svg
-install -pDm644 assets/icon/terminal.png %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/org.wezfurlong.wezterm.png
+install -pDm644 assets/icon/wezterm-icon.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/wezterm.svg
+install -pDm644 assets/icon/terminal.png %{buildroot}%{_datadir}/icons/hicolor/128x128/apps/wezterm.png
 
 install -pDm644 assets/wezterm.appdata.xml %{buildroot}%{_datadir}/metainfo/%{appname}.appdata.xml
 
@@ -57,8 +57,8 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/%{appname}.desktop
 %{_bindir}/strip-ansi-escapes
 
 %{_datadir}/applications/%{appname}.desktop
-%{_datadir}/icons/hicolor/128x128/apps/org.wezfurlong.wezterm.png
-%{_datadir}/icons/hicolor/scalable/apps/org.wezfurlong.wezterm.svg
+%{_datadir}/icons/hicolor/128x128/apps/wezterm.png
+%{_datadir}/icons/hicolor/scalable/apps/wezterm.svg
 %{_datadir}/metainfo/%{appname}.appdata.xml
 
 %changelog

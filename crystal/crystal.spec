@@ -10,12 +10,12 @@ License:        APACHE
 URL:            https://github.com/crystal-lang/crystal
 Source:         %{url}/archive/master/%{appname}-master.tar.gz
 
-BuildRequires:  gcc-c++ gmp-devel libbsd-devel libedit-devel libevent-devel
-BuildRequires: libxml2-devel libyaml-devel libstdc++-static
-BuildRequires:  make openssl-devel pcre-devel wget tar
+BuildRequires:  gcc-c++ make gmp-devel libbsd-devel libedit-devel libevent-devel
+BuildRequires:  libxml2-devel libyaml-devel libstdc++-static
+BuildRequires:  openssl-devel pcre-devel wget tar
 
-Requires:  gcc pcre-devel libevent-devel openssl-devel llvm
-Requires:  libxml2-devel libyaml-devel libstdc++-static
+Requires:       gcc pcre-devel libevent-devel openssl-devel llvm
+Requires:       libxml2-devel libyaml-devel libstdc++-static
 
 %if 0%{?fedora} <= 33
 %global llvm_version 0

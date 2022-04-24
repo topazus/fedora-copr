@@ -1,0 +1,58 @@
+%global debug_package %{nil}
+%global build_timestamp %{lua: print(os.date("%Y.%m.%d"))}
+%global appname zenith
+%bcond_without check
+
+Name:           %{appname}-git
+Version:        %{build_timestamp}
+Release:        1%{?dist}
+Summary:        Zenith - sort of like top or htop but with zoom-able charts, CPU, GPU, network, and disk usage
+License:        MIT
+URL:            https://github.com/bvaisvil/zenith
+Source:         %{url}/archive/master/%{appname}-master.tar.gz
+
+BuildRequires: gcc-c++ cmake pkg-config
+BuildRequires: desktop-file-utils
+
+%description
+In terminal graphical metrics for your *nix system written in Rust
+
+%prep
+%autosetup -n %{appname}-master -p1
+curl https://sh.rustup.rs -sSf | sh -s -- --profile minimal -y
+
+%build
+$HOME/.cargo/bin/cargo build --release
+
+%install
+install -pDm755 target/release/%{appname} %{buildroot}%{_bindir}/%{appname}
+
+%if %{with check}
+%check
+%pytest
+%meson_test
+%ctest
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
+desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
+%endif
+
+%files
+%license LICENSE*
+%doc README.md
+%{_bindir}/%{appname}
+%{_datadir}/applications/*.desktop
+%{_datadir}/icons/hicolor/*/apps/*.png
+%{python3_sitearch}
+%{python3_sitelib}
+%{python3_sitelib}/%{appname}/*
+%{python3_sitelib}/*.egg-info/*
+%{_datadir}
+%{_datadir}/metainfo/*.appdata.xml
+
+%{_datadir}/man/man1/*.1.gz
+
+%{_datadir}/bash-completion/completions/*
+%{_datadir}/zsh/site-functions/_*
+%{_datadir}/fish/vendor_conf.d/*.fish
+
+%changelog
