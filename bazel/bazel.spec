@@ -3,7 +3,7 @@
 
 Name:           bazel
 Version:        5.2.0
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Correct, reproducible, and fast builds for everyone.
 License:        Apache License 2.0
 URL:            http://bazel.io/
@@ -11,7 +11,7 @@ Source0:        https://github.com/bazelbuild/bazel/releases/download/%{version}
 
 Provides:	bazel
 
-BuildRequires:  java-17-openjdk-devel
+BuildRequires:  java-11-openjdk-devel
 #BuildRequires:  java-1_8_0-openjdk-headless ## OpenSUSE
 #BuildRequires:  java-1.8.0-openjdk-headless ## Mageia
 BuildRequires:  zlib-devel
@@ -22,7 +22,7 @@ BuildRequires:  unzip zip
 
 BuildRequires:  python3
 
-Requires:       java-17-openjdk-devel
+Requires:       java-11-openjdk-devel
 #Requires:       java-1_8_0-openjdk-headless ## OpenSUSE
 #Requires:       java-1.8.0-openjdk-headless ## Mageia
 
