@@ -11,8 +11,7 @@ Source0:        https://github.com/bazelbuild/bazel/releases/download/%{version}
 Provides:	bazel
 
 BuildRequires:  java-11-openjdk-devel
-#BuildRequires:  java-1_8_0-openjdk-headless ## OpenSUSE
-#BuildRequires:  java-1.8.0-openjdk-headless ## Mageia
+
 BuildRequires:  zlib-devel
 BuildRequires:  pkgconfig
 BuildRequires:  gcc-c++
@@ -22,9 +21,6 @@ BuildRequires:  unzip zip
 BuildRequires:  python3 python-absl-py
 
 Requires:       java-11-openjdk-devel
-#Requires:       java-1_8_0-openjdk-headless ## OpenSUSE
-#Requires:       java-1.8.0-openjdk-headless ## Mageia
-
 
 %description
 Correct, reproducible, and fast builds for everyone.
