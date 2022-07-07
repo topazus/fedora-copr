@@ -44,8 +44,8 @@ bash ./scripts/generate_bash_completion.sh --bazel=output/bazel --output=output/
 %install
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/bash-completion/completions
-install -pDm644 output/bazel %{buildroot}%{_bindir}/bazel-real
-install -pDm644 ./scripts/packages/bazel.sh %{buildroot}%{_bindir}/bazel
+install -pDm755 output/bazel %{buildroot}%{_bindir}/bazel-real
+install -pDm755 ./scripts/packages/bazel.sh %{buildroot}%{_bindir}/bazel
 install -pDm644 output/bazel-complete.bash %{buildroot}%{_datadir}/bash-completion/completions/bazel
 
 
