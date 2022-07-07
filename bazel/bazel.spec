@@ -1,4 +1,3 @@
-
 %global debug_package %{nil}
 
 Name:           bazel
@@ -20,7 +19,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  which
 BuildRequires:  unzip zip
 
-BuildRequires:  python3
+BuildRequires:  python3 python-absl-py
 
 Requires:       java-11-openjdk-devel
 #Requires:       java-1_8_0-openjdk-headless ## OpenSUSE
@@ -34,24 +33,27 @@ Correct, reproducible, and fast builds for everyone.
 %setup -q -c -n bazel-%{version}
 
 %build
-# loose epoch from their release date
-export SOURCE_DATE_EPOCH="$(date -d $(head -1 CHANGELOG.md | %{__grep} -Eo '\b[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}\b' ) +%s)"
-export EMBED_LABEL="%{version}"
-
-bash ./compile.sh
-bash ./scripts/generate_bash_completion.sh --bazel=output/bazel --output=output/bazel-complete.bash
+bash compile.sh
+bash scripts/generate_bash_completion.sh --bazel=output/bazel --output=output/bazel.bash
+python scripts/generate_fish_completion.py --bazel=output/bazel --output=output/bazel.fish
 
 %install
 mkdir -p %{buildroot}%{_bindir}
 mkdir -p %{buildroot}%{_datadir}/bash-completion/completions
-install -pDm755 output/bazel %{buildroot}%{_bindir}/bazel-real
-install -pDm755 ./scripts/packages/bazel.sh %{buildroot}%{_bindir}/bazel
-install -pDm644 output/bazel-complete.bash %{buildroot}%{_datadir}/bash-completion/completions/bazel
 
+install -pDm755 output/bazel %{buildroot}%{_bindir}/bazel-real
+install -pDm755 scripts/packages/bazel.sh %{buildroot}%{_bindir}/bazel
+
+install -pDm644 output/bazel-complete.bash %{buildroot}%{_datadir}/bash-completion/completions/%{name}
+install -pDm644 scripts/zsh_completion/_bazel %{buildroot}%{_datadir}/zsh/site-functions/_%{name}
+install -pDm644 output/bazel.fish %{buildroot}%{_datadir}/fish/vendor_conf.d/%{name}.fish
 
 %files
 %{_bindir}/bazel
 %{_bindir}/bazel-real
-%{_datadir}/bash-completion/completions/bazel
+
+%{_datadir}/bash-completion/completions/%{name}
+%{_datadir}/zsh/site-functions/_%{name}
+%{_datadir}/fish/vendor_conf.d/%{name}.fish
 
 %changelog
