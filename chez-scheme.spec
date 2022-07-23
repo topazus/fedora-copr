@@ -10,8 +10,8 @@ License:        Apache
 URL:            https://github.com/cisco/ChezScheme
 #Source0:
 
-BuildRequires:  make gcc tar lua
-BuildRequires:  ncurses-devel libuuid-devel libX11-devel git
+BuildRequires:  make gcc tar lua wget git
+BuildRequires:  ncurses-devel libuuid-devel libX11-devel
 
 %description
 Chez Scheme is both a programming language and an implementation of that language, with supporting tools and documentation.
