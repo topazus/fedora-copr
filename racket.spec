@@ -10,7 +10,6 @@ License:        GPLv3 and LGPLv3 and MIT
 URL:            https://racket-lang.org
 #Source0:
 
-
 BuildRequires: make gcc racket tar wget git
 
 
@@ -47,6 +46,10 @@ cd racket-*/src
 cd racket-*/src
 export QA_SKIP_BUILD_ROOT=1
 %make_install
+
+# -i: for system-wide
+# --auto: do not ask
+raco pkg install --auto -i racket-langserver
 
 %files
 /etc/racket/config.rktd
