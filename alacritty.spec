@@ -11,7 +11,7 @@ License:        ASL 2.0 or MIT
 URL:            https://github.com/alacritty/alacritty
 #Source:
 
-BuildRequires:  gcc-c++ git
+BuildRequires:  gcc-c++ desktop-file-utils git
 BuildRequires:  cmake freetype-devel fontconfig-devel libxcb-devel libxkbcommon-devel
 
 %description
