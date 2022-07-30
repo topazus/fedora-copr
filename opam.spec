@@ -13,7 +13,7 @@ URL:            https://opam.ocaml.org/
 #Source:
 
 BuildRequires:  gcc gcc-c++ make git openssl
-%if %bootstrap
+%if !%bootstrap
 BuildRequires:  ocaml ocaml-dune
 BuildRequires:  ocaml-findlib
 BuildRequires:  ocaml-ocamlbuild
