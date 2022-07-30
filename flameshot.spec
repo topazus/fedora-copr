@@ -10,7 +10,7 @@ License:        GPL
 URL:            https://github.com/flameshot-org/flameshot
 #Source:
 
-BuildRequires:  gcc-c++ cmake
+BuildRequires:  gcc-c++ cmake git
 BuildRequires:  qt5-qtbase-devel qt5-linguist qt5-qtsvg-devel
 
 Requires:       qt5-qtbase qt5-qtsvg-devel
