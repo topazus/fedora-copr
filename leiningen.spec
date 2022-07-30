@@ -11,7 +11,7 @@ URL:            https://github.com/technomancy/leiningen
 #Source:
 
 
-BuildRequires:  gcc gcc-c++ make java-17-openjdk git
+BuildRequires:  gcc gcc-c++ make java-17-openjdk git wget
 
 %description
 Leiningen is for automating Clojure projects without setting your hair on fire.
