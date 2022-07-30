@@ -40,7 +40,7 @@ Requires:       bubblewrap m4 patch
 Opam is a source-based package manager for OCaml. It supports multiple simultaneous compiler installations, flexible package constraints, and a Git-friendly development workflow.
 
 %prep
-git clone --depth=1 https://github.com/ocaml/opam .
+git clone --depth=1 https://github.com/ocaml/opam.git .
 
 %build
 %if %bootstrap
